@@ -42,9 +42,9 @@ if (isset($_GET['error'])) {
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" style="margin-top: 100px;">
         <div class="row justify-content-center">
-            <div class="col-7 col-12">
+            <div class="col-12 col-sm-8 col-md-6">
                 <div class="card m-4">
                     <div class="card-header" style="text-align: center">
                         Login to Bankas-1
@@ -65,11 +65,7 @@ if (isset($_GET['error'])) {
                 </div>
             </div>
             <?php if (isset($error)) : ?>
-                <div class="col-6">
-                    <div class="alert alert-danger m-4" role="alert">
-                        <?= $error ?>
-                    </div>
-                </div>
+                <h6 class="alert alert-danger" role="alert"> <?= $error ?> </h6>
             <?php endif ?>
         </div>
     </div>

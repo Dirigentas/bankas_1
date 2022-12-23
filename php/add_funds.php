@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     <div class=" container" style='padding-top:100px; text-align:center'>
-        <div class="row">
+        <div class="row" style=" border: solid 3px skyblue">
             <?php foreach ($arr as $value) :
                 if ($_GET['ID'] == $value['ID']) : ?>
                     <div class="col">
@@ -76,15 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endforeach ?>
         </div>
     </div>
-
-    <form action="http://localhost/bankas_1/php/add_funds.php?ID=<?= $_GET['ID'] ?>" method="post" style='padding:100px'>
-        <div class="mb-3">
-            <label class="form-label">Suma, eur</label>
-            <input type="text" name="pokytis" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-success">Pridėti lėšas</button>
-    </form>
-
+    <div class="container row justify-content-center" style="margin-top: 100px;">
+        <form action="http://localhost/bankas_1/php/add_funds.php?ID=<?= $_GET['ID'] ?>" method="post" class="m-4 col-12 col-sm-8 col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Suma, eur</label>
+                <input type="text" name="pokytis" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Pridėti lėšas</button>
+        </form>
+    </div>
     <h6 <?= isset($_GET['error']) ? 'class="alert alert-danger" role="alert"'  : '' ?>><?= isset($_GET['error']) ? 'Įnešama suma turi būti didesnė už 0 eur, formatas turi būti iki 2 skaičių po kablelio' : '' ?></h6>
     <h6 <?= isset($_GET['success']) ? 'class="alert alert-success" role="alert"'  : '' ?>><?= isset($_GET['success']) ? 'Lėšos pridėtos sėkmingai' : '' ?></h6>
 </body>
