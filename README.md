@@ -2,11 +2,11 @@
 
 _software development project_
 
-<br>
+<!-- <br> -->
 
 ## 🌟 About
 
-Software program mainly used for handling bank clients and their information.
+Software program mainly used for handling bank clients and their information. <br>
 This software is intended to be used by bank employees.
 
 <!-- Site published at: [GitHub pages](https://front-end-by-rimantas.github.io/40-grupe-portfolio-personal/) -->
