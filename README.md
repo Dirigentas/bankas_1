@@ -1,6 +1,6 @@
 # Bank_1
 
-<!-- _web design project_ -->
+_software development project_
 
 <br>
 
@@ -24,7 +24,7 @@ This software is intended to be used by bank employees.
 -   basic design
 -   form
 
-## 🧰 Getting Started
+<!-- ## 🧰 Getting Started -->
 
 ## 😃 Authors
 
