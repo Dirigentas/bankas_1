@@ -16,11 +16,12 @@ This software is intended to be used by bank employees.
 ## 🎯 Project features/goals
 
 -   coded with plain PHP without OOP
--   GET, POST usage
+-   GET, POST, SESSION usage
 -   login validation
 -   new client personal data validation
--   bank account addition and subtract validation
+-   bank account addition and subtraction validation
 -   responsive design
+-   basic design
 -   form
 
 ## 🧰 Getting Started
