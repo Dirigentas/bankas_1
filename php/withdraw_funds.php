@@ -6,6 +6,12 @@
 // print_r($_POST);
 // echo '<br>';
 
+session_start();
+if (!isset($_SESSION['user'])) {
+    header('Location: http://localhost/bankas_1/php/log.php');
+    die;
+}
+
 $arr = json_decode(file_get_contents(__DIR__ . '/ibans.json'), 1);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -17,15 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             if ($post > 0 && (float) $post * 1000 % 10 === 0) {
                 if ($value['likutis'] - $post < 0) {
-                    header('Location: http://localhost/pingvinai/bankas_1/php/withdraw_funds.php?ID=' . ($value['ID']) . '&error2');
+                    header('Location: http://localhost/bankas_1/php/withdraw_funds.php?ID=' . ($value['ID']) . '&error2');
                     die;
                 }
                 $arr[$key]['likutis'] -= (float) $post;
                 file_put_contents(__DIR__ . '/ibans.json', json_encode($arr));
-                header("Location: http://localhost/pingvinai/bankas_1/php/withdraw_funds.php?ID=" . ($value['ID']) . '&success');
+                header("Location: http://localhost/bankas_1/php/withdraw_funds.php?ID=" . ($value['ID']) . '&success');
                 die;
             } else {
-                header('Location: http://localhost/pingvinai/bankas_1/php/withdraw_funds.php?ID=' . ($value['ID']) . '&error');
+                header('Location: http://localhost/bankas_1/php/withdraw_funds.php?ID=' . ($value['ID']) . '&error');
                 die;
             }
         }
@@ -44,20 +50,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: deepskyblue; font-weight: bold">
+    <nav class="navbar navbar-expand-sm" style="background-color: deepskyblue; font-weight: bold">
         <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="http://localhost/pingvinai/bankas_1/php/iban_list.php">Sąskaitų sąrašas</a>
-                    <a class="nav-link" href="http://localhost/pingvinai/bankas_1/php/new_iban.php">Pridėti naują sąskaitą</a>
-                </div>
+            <div class="navbar-nav" style="display:flex; gap: 10%; width: 100%; justify-content:space-around">
+                <div style="color: #fff">Logged in as <br><?= $_SESSION['user']['name'] ?></div>
+                <a class="nav-link" href="http://localhost/bankas_1/php/iban_list.php">Sąskaitų sąrašas</a>
+                <a class="nav-link" href="http://localhost/bankas_1/php/new_iban.php">Pridėti naują sąskaitą</a>
+                <form action="http://localhost/bankas_1/php/log.php?logout" method="post">
+                    <button type="submit" class="btn btn-success">Log Out</button>
+                </form>
             </div>
         </div>
     </nav>
 
-    <h6 <?= isset($_GET['error']) ? 'class="alert alert-danger" role="alert"'  : '' ?>><?= isset($_GET['error']) ? 'Nusiimama suma turi būti didesnė už 0 eur, formatas turi būti iki 2 skaičių po kablelio' : '' ?></h6>
-    <h6 <?= isset($_GET['error2']) ? 'class="alert alert-danger" role="alert"'  : '' ?>><?= isset($_GET['error2']) ? 'Sąskaitos likutis negali būti mažesnis už 0 eur' : '' ?></h6>
-    <h6 <?= isset($_GET['success']) ? 'class="alert alert-success" role="alert"'  : '' ?>><?= isset($_GET['success']) ? 'Lėšos nuskaičiuotos sėkmingai' : '' ?></h6>
 
     <div class=" container" style='padding-top:100px; text-align:center'>
         <div class="row">
@@ -70,20 +75,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         Pavardė: <?= $value['pavarde'] ?>
                     </div>
                     <div class="col">
-                        Sąskaitos likutis: <?= number_format($value['likutis'], 2) ?> eur
+                        Sąskaitos likutis: <?= number_format($value['likutis'], 2, ',', ' ') ?> eur
                     </div>
                 <?php endif ?>
             <?php endforeach ?>
         </div>
     </div>
 
-    <form action="http://localhost/pingvinai/bankas_1/php/withdraw_funds.php?ID=<?= $_GET['ID'] ?>" method="post" style='padding:100px'>
+    <form action="http://localhost/bankas_1/php/withdraw_funds.php?ID=<?= $_GET['ID'] ?>" method="post" style='padding:100px'>
         <div class="mb-3">
             <label class="form-label">Suma, eur</label>
             <input type="text" name="pokytis" class="form-control">
         </div>
         <button type="submit" class="btn btn-success">Nusiimti lėšas</button>
     </form>
+
+    <h6 <?= isset($_GET['error']) ? 'class="alert alert-danger" role="alert"'  : '' ?>><?= isset($_GET['error']) ? 'Nusiimama suma turi būti didesnė už 0 eur, formatas turi būti iki 2 skaičių po kablelio' : '' ?></h6>
+    <h6 <?= isset($_GET['error2']) ? 'class="alert alert-danger" role="alert"'  : '' ?>><?= isset($_GET['error2']) ? 'Sąskaitos likutis negali būti mažesnis už 0 eur' : '' ?></h6>
+    <h6 <?= isset($_GET['success']) ? 'class="alert alert-success" role="alert"'  : '' ?>><?= isset($_GET['success']) ? 'Lėšos nuskaičiuotos sėkmingai' : '' ?></h6>
 </body>
 
 </html>

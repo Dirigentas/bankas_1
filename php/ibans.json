@@ -1,18 +1,1 @@
-[
-    {
-        "ID": "92289",
-        "vardas": "Albis",
-        "pavarde": "Lapinskas",
-        "asmens_kodas": "39210282222",
-        "IBAN": "LT35 7044 0479 2504 2847",
-        "likutis": 1000.12
-    },
-    {
-        "ID": "5940",
-        "vardas": "Aras",
-        "pavarde": "Minelga",
-        "asmens_kodas": "39208151111",
-        "IBAN": "LT70 7044 0873 2812 9201",
-        "likutis": 0
-    }
-]
+[{"ID":"16974","vardas":"bbbs","pavarde":"Bardas","asmens_kodas":"39912230011","IBAN":"LT12 7044 0371 8771 3282","likutis":10},{"ID":"92289","vardas":"Albis","pavarde":"Lapinskas","asmens_kodas":"39210282222","IBAN":"LT35 7044 0479 2504 2847","likutis":1000.12}]
