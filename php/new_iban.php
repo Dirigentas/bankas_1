@@ -37,8 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         in_array($postAK[5], range(0, 3)) == 0 ||
         strlen($postAK) != 11
     ) {
-        echo '<br>';
-        echo 'error3';
         header('Location: http://localhost/bankas_1/php/new_iban.php?error3');
         die;
     }
